@@ -20,7 +20,7 @@ namespace MartenProjectionListenerRepro
         {
             _logger.LogInformation("Deleted: {Deleted}", JsonConvert.SerializeObject(commit.Deleted));
             _logger.LogInformation("Inserted: {Inserted}", JsonConvert.SerializeObject(commit.Inserted));
-            _logger.LogInformation("Inserted: {Inserted}", JsonConvert.SerializeObject(commit.Updated));
+            _logger.LogInformation("Updated: {Updated}", JsonConvert.SerializeObject(commit.Updated));
             _logger.LogInformation("EventAdded: {Events}", JsonConvert.SerializeObject(commit.GetEvents()));
             return Task.CompletedTask;
         }
