@@ -1,0 +1,33 @@
+version: "3"
+services:
+  marten-database:
+    container_name: marten-postgres
+    image: "postgres" # use latest official postgres version
+    environment:
+      POSTGRES_USER: marten-test
+      POSTGRES_PASSWORD: secretpassword1234
+      POSTGRES_DB: marten-db
+    volumes:
+      - database-data:/var/lib/postgresql/data/ # persist data even if container shuts down
+    ports:
+      - "5432:5432"
+    networks:
+      - network
+
+  marten-pgadmin:
+    container_name: marten-pgadmin4
+    image: dpage/pgadmin4
+    restart: always
+    environment:
+      PGADMIN_DEFAULT_EMAIL: admin@admin.com
+      PGADMIN_DEFAULT_PASSWORD: root
+    ports:
+      - "5050:80"
+    networks:
+      - network
+
+volumes:
+  database-data: # named volumes can be managed easier using docker-compose
+
+networks:
+  network:
