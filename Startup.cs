@@ -41,7 +41,7 @@ namespace MartenProjectionListenerRepro
 
                 opts.Listeners.Add(new TestListener(lf.CreateLogger<TestListener>()));
                 opts.Projections.AsyncMode = DaemonMode.HotCold;
-                opts.Projections.Add<TestProjection>(ProjectionLifecycle.Inline);
+                opts.Projections.Add<TestProjection>(ProjectionLifecycle.Async);
             });
         }
 
