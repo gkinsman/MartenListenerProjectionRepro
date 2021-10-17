@@ -1,5 +1,6 @@
 ﻿using System;
 using Marten.Events.Aggregation;
+using Marten.Events.Projections;
 
 namespace MartenProjectionListenerRepro
 {
@@ -10,10 +11,8 @@ namespace MartenProjectionListenerRepro
     }
 
     public class TestEvent
-    {
-        
-    }
-    
+    { }
+
     public class TestProjection : AggregateProjection<TestEntity>
     {
         public void Apply(TestEvent @event, TestEntity entity)

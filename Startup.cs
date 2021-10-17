@@ -41,7 +41,7 @@ namespace MartenProjectionListenerRepro
 
                 opts.Listeners.Add(new TestListener(lf.CreateLogger<TestListener>()));
                 opts.Projections.AsyncMode = DaemonMode.HotCold;
-                opts.Projections.Add<TestProjection>(ProjectionLifecycle.Async);
+                opts.Projections.Add<TestProjection>(ProjectionLifecycle.Inline);
             });
         }
 
@@ -59,12 +59,12 @@ namespace MartenProjectionListenerRepro
             {
                 endpoints.MapGet("/", async context =>
                 {
-                    await context.Response.WriteAsync("Hello World!");
-
                     var store = context.RequestServices.GetService<IDocumentStore>();
                     using var session = store.OpenSession();
                     session.Events.StartStream<TestEntity>(Guid.NewGuid(), new [] {new TestEvent()});
                     await session.SaveChangesAsync();
+                    
+                    await context.Response.WriteAsync("Hello World!");
                 });
             });
         }
